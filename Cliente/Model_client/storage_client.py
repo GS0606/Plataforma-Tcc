@@ -34,6 +34,14 @@ class ClientStorage:
             """, (client.name, client.surname, client.email, client.data_nascimento))
             connection.commit()
             return cursor.lastrowid
+        
+    def get_all_clients(self):
+        with self.connect_to_db() as connection:
+            cursor = connection.cursor()
+            cursor.execute("SELECT * FROM client")
+            rows = cursor.fetchall()
+            clients = [Client(*row) for row in rows]
+            return clients
 
     def get_client(self, client_id):
         with self.connect_to_db() as connection:

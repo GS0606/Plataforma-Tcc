@@ -9,6 +9,9 @@ class ClientService:
         new_client = Client(id=None, name=name, surname=surname, email=email, data_nascimento=data_nascimento)
         new_client_id = self.storage.create_client(new_client)
         return new_client_id
+    
+    def get_all_clients(self):
+        return self.storage.get_all_clients()
 
     def get_client(self, client_id):
         return self.storage.get_client(client_id)
