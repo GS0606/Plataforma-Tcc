@@ -1,0 +1,5 @@
+{
+    "python.analysis.extraPaths": [
+        "./Cliente/Model_client"
+    ]
+}

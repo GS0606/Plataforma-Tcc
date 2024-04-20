@@ -1,9 +1,6 @@
 import sqlite3
-from Model_client.model_client import Client
+from model_client import Client
 import datetime as datetime
-
-import sqlite3
-import datetime
 
 class ClientStorage:
     def __init__(self, db_name='clients.db'):
@@ -63,25 +60,4 @@ class ClientStorage:
             cursor.execute("DELETE FROM client WHERE id=?", (client_id,))
             connection.commit()
 
-# Exemplo de uso:
-if __name__ == "__main__":
-    # Criando a tabela client
-    client_storage = ClientStorage()
-    client_storage.create_client_table()
 
-    # # Criando um novo cliente
-    # new_client = Client(id=None, name="João", surname="Silva", email="joao@example.com", data_nascimento="1990-01-01")
-    # new_client_id = client_storage.create_client(new_client)
-    # print("Novo cliente criado com ID:", new_client_id)
-
-    # # Obtendo o cliente recém-criado
-    # retrieved_client = client_storage.get_client(new_client_id)
-    # print("Cliente obtido do banco de dados:", retrieved_client.__dict__)
-
-    # # Atualizando o cliente
-    # retrieved_client.name = "João Novo"
-    # client_storage.update_client(retrieved_client)
-
-    # # Deletando o cliente
-    # client_storage.delete_client(new_client_id)
-    # print("Cliente deletado.")
