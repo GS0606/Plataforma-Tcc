@@ -1,33 +1,39 @@
-from model_product import Product
 import sqlite3
+from model_product import Product
 import datetime as datetime
 
 class ProductStorage:
     def __init__(self, db_name='products.db'):
-        self.db_name= db_name
+        self.db_name = db_name
+        self.create_product_table()
         
-    def conect_to_db(self):
+    def connect_to_db(self):
         return sqlite3.connect(self.db_name)
     
     def create_product_table(self):
-         with self.connect_to_db() as connection:
+        with self.connect_to_db() as connection:
             cursor = connection.cursor()
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS product (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    name VARCHAR(255) NOT NULL,
-                    dest VARCHAR(255) NOT NULL,
-                    quantity VARCHAR(255) NOT NULL UNIQUE,
+                    name TEXT NOT NULL,
+                    dest TEXT NOT NULL,
+                    quantity TEXT NOT NULL,
                     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 )
             """)
             connection.commit()
+    
+    
 
     def create_product(self, product):
-        with self.conect_to_db() as connection:
+        with self.connect_to_db() as connection:
             cursor = connection.cursor()
-            cursor.execute("INSERT INTO product (name, dest, quantity) VALUES (?, ?, ?)" , (product.name, product.dest, product.quantity))
+            cursor.execute("""
+                INSERT INTO product (name, dest, quantity)
+                VALUES (?, ?, ?)
+            """ , (product.name, product.dest, product.quantity))
             connection.commit()
             return cursor.lastrowid
             
