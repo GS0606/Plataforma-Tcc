@@ -5,6 +5,7 @@ import datetime as datetime
 class ClientStorage:
     def __init__(self, db_name='clients.db'):
         self.db_name = db_name
+        self.create_client_table()
 
     def connect_to_db(self):
         return sqlite3.connect(self.db_name)

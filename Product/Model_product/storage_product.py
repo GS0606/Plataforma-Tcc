@@ -16,17 +16,15 @@ class ProductStorage:
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS product (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    name TEXT NOT NULL,
-                    dest TEXT NOT NULL,
-                    quantity TEXT NOT NULL,
+                    name VARCHAR(255) NOT NULL,
+                    dest VARCHAR(255) NOT NULL,
+                    quantity INTERGER NOT NULL,
                     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 )
             """)
             connection.commit()
     
-    
-
     def create_product(self, product):
         with self.connect_to_db() as connection:
             cursor = connection.cursor()
