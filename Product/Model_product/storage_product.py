@@ -36,17 +36,28 @@ class ProductStorage:
             return cursor.lastrowid
             
     def get_all_products(self):
+        products = []
         with self.connect_to_db() as connection:
             cursor = connection.cursor()
-            cursor.execute("SELECT * FROM product")
+            cursor.execute("SELECT id, name, dest, quantity, created_at, updated_at FROM product")
             rows = cursor.fetchall()
-            products = [Product(*row) for row in rows]
-            return products
+            for row in rows:
+                # Supondo que a ordem dos parâmetros do construtor de Product seja (id, name, dest, quantity, created_at, updated_at)
+                product = Product(
+                    id=row[0],
+                    name=row[1],
+                    dest=row[2],
+                    quantity=row[3],
+                    created_at=row[4],
+                    updated_at=row[5]
+                )
+                products.append(product)
+        return products
         
     def get_product(self, product_id):
         with self.connect_to_db() as connection:
             cursor = connection.cursor()
-            cursor.execute("SELECT * FROM product WHERE id=?", (product_id,))
+            cursor.execute("SELECT id, name, dest, quantity, created_at, updated_at FROM product WHERE id=?", (product_id,))
             row = cursor.fetchone()
             if row:
                 return Product(*row)
