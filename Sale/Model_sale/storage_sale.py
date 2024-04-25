@@ -1,7 +1,5 @@
 import sqlite3
-from sale_model import Sale
-from status_model import SaleStatus
-from Sale.Model_sale.SaleItem import SaleItem
+from sale_model import Sale, SaleItem, SaleStatus
 from datetime import datetime  
 
 class SaleStorage:
@@ -49,15 +47,16 @@ class SaleStorage:
             return sale_id
     
     def add_items_to_sale(self, connection, sale_id, items):
-        cursor = connection.cursor()
-        for item in items:
-            cursor.execute("""
-                INSERT INTO sale_item (sale_id, product_id, quantity)
-                VALUES (?, ?, ?)
-            """ , (sale_id, item.product_id, item.quantity))
-        connection.commit()
+        with self.connect_to_db() as connection:
+            cursor = connection.cursor()
+            for item in items:
+                cursor.execute("""
+                    INSERT INTO sale_item(sale_id, product_id, quantity)
+                    VALUES (?, ?, ?)
+                """ , (sale_id, item.product_id, item.quantity))
+            connection.commit()
 
-    def update_sale_item_quantity(self, sale_id, item_id, quantity):
+    def update_sale_item_quantity(self, item_id, quantity):
         with self.connect_to_db() as connection:
             cursor = connection.cursor()
             cursor.execute("""

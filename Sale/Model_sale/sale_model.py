@@ -9,14 +9,14 @@ class Sale:
         self.created_at = created_at or datetime.datetime.now()
         self.updated_at = updated_at or datetime.datetime.now()
 
-class SaleItem:
-    def __init__(self, item_id, product_id, quantity):
-        self.item_id = item_id
-        self.product_id = product_id
-        self.quantity = quantity
-
 class SaleStatus:
     STARTED = 0
     PROGRESS = 1
     DONE = 2
     CANCELED = 3
+
+# class SaleItem:
+#     def __init__(self, item_id, product_id, quantity):
+#         self.item_id = item_id
+#         self.product_id = product_id
+#         self.quantity = quantity

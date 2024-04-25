@@ -42,7 +42,6 @@ class ProductStorage:
             cursor.execute("SELECT id, name, dest, quantity, created_at, updated_at FROM product")
             rows = cursor.fetchall()
             for row in rows:
-                # Supondo que a ordem dos parâmetros do construtor de Product seja (id, name, dest, quantity, created_at, updated_at)
                 product = Product(
                     id=row[0],
                     name=row[1],
