@@ -37,4 +37,4 @@ def delete_client(id):
     return jsonify({"message": "Client deleted successfully"}), 200
 
 if __name__ == '__main__':
-    app.run(port=5000, host='localhost', debug=True)
+    app.run(port=5001, host='localhost', debug=True)

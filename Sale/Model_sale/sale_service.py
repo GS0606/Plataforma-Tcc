@@ -1,5 +1,5 @@
 from sale_model import Sale, SaleItem, SaleStatus
-from sale_storage import SaleStorage
+from storage_sale import SaleStorage
 
 class SaleService:
     def __init__(self):

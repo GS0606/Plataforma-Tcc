@@ -15,8 +15,8 @@ class SaleStatus:
     DONE = 2
     CANCELED = 3
 
-# class SaleItem:
-#     def __init__(self, item_id, product_id, quantity):
-#         self.item_id = item_id
-#         self.product_id = product_id
-#         self.quantity = quantity
+class SaleItem:
+    def __init__(self, item_id, product_id, quantity):
+        self.item_id = item_id
+        self.product_id = product_id
+        self.quantity = quantity
